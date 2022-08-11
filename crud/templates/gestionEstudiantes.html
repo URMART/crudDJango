@@ -1,0 +1,90 @@
+{% extends "./base.html" %}
+
+{% block title %}Gestion Estudiantes {% endblock %}
+
+
+
+
+{% block body  %}
+
+
+<div class="row">
+
+    <div    class="col-sm-12 col-md-6 col-lg-4 col-xs-4">
+        <h2>Gestion Estudiantes</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarEstudiante/" method="post">{% csrf_token %}
+                    <div class="form-group">
+                        <input class="my-1" type="text" id="txtCedula" name="txtCedula" placeholder="Cedula" minlength="10" maxlength="10" required>
+                    </div>
+                    <div class="form-group">
+                        <input  class="my-1" type="text" id="txtNombre" name="txtNombre" placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <input class="my-1" type="text" id="txtApellido" name="txtApellido" placeholder="Apellido"  required>
+                    </div>
+                    <div class="form-group">
+                        <input class="my-1" type="text" id="edad" name="edad" placeholder="edad"  required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white my-1">Guardar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+    </div>
+    <div    class="col-sm-12 col-md-6 col-lg-8 col-xs-8">
+
+        <div class="table-responsive py-2">
+            <h1>Listado de estudiantes</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cedula</th>
+                        <th>Edad</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    {% for i in estudiantes%}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.nombre}}</td>
+                        <td>{{i.apellido}}</td>
+                        <td>{{i.cedula}}</td>
+                        <td>{{i.edad}}</td>
+                        <td><a href="edicionEstudiante/{{i.cedula}}" class="btn btn-info" >Editar</a></td>
+                        <td><a href="eliminarEstudiante/{{i.cedula}}" class="btn btn-danger eliminar" >Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+{% endblock  %}
+
+
+
+
